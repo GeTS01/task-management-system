@@ -1,0 +1,14 @@
+server:
+  port: 8081
+
+spring:
+  datasource:
+    username: postgres
+    password: Ivan230691
+    url: jdbc:postgresql://localhost:5432/taskmanagerdb
+  jpa:
+    hibernate:
+      ddl-auto: create
+  liquibase:
+    enabled: false
+#      -drop

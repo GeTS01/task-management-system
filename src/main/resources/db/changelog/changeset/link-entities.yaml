@@ -1,0 +1,13 @@
+databaseChangeLog:
+  - changeSet:
+      id: link-entities
+      author: Georgi
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: task_id
+            baseTableName: comments
+            baseTableSchemaName: public
+            constraintName: fk_address_person
+            referencedColumnNames: id
+            referencedTableName: task
+            referencedTableSchemaName: public
