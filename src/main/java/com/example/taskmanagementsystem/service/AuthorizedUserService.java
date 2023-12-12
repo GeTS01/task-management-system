@@ -4,4 +4,5 @@ import com.example.taskmanagementsystem.domain.User;
 
 public interface AuthorizedUserService {
     User getUser();
+
 }

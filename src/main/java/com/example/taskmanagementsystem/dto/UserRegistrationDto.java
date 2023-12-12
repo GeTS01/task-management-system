@@ -7,6 +7,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.time.ZonedDateTime;
 
 public class UserRegistrationDto {
     @NotNull
@@ -34,12 +35,13 @@ public class UserRegistrationDto {
 
     public User createRegistrationUser(UserRegistrationDto userRegistrationDto) {
         User user = new User();
-        this.name = userRegistrationDto.getName();
-        this.lastName = userRegistrationDto.getLastName();
-        this.patronymic = userRegistrationDto.getPatronymic();
-        this.email = userRegistrationDto.getEmail();
-        this.password = userRegistrationDto.getPassword();
-        this.role = userRegistrationDto.getRole();
+        user.setName(userRegistrationDto.getName());
+        user.setName(userRegistrationDto.getLastName());
+        user.setPatronymic(userRegistrationDto.getPatronymic());
+        user.setEmail(userRegistrationDto.getEmail());
+        user.setPassword(userRegistrationDto.getPassword());
+        user.setRole(userRegistrationDto.getRole());
+        user.setCreateAt(ZonedDateTime.now());
         return user;
     }
 

@@ -61,9 +61,9 @@ public class JwtServiceImpl implements JwtService {
         try {
             claims = Jwts
                     .parserBuilder()
-                    .setSigningKey(JwtHelper.getSignInKey(secret)).
-                    build()
-                    .parseClaimsJwt(token)
+                    .setSigningKey(JwtHelper.getSignInKey(secret))
+                    .build()
+                    .parseClaimsJws(token)
                     .getBody();
         } catch (ExpiredJwtException e) {
             logger.warn("Token {} was expired", token);

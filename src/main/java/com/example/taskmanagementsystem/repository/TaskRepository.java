@@ -8,7 +8,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface TaskRepository extends JpaRepository<Task, Long> {
 
@@ -38,10 +37,7 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
     Task updateAuthorById(@Param("authorId") Long authorId,
                           @Param("id") Long id);
 
-
-
-
-    @Query(value = "SELECT EXISTS (select * from task t where t.id = id)", nativeQuery = true)
+    @Query(value = "SELECT EXISTS (select * from task t where t.id = :id)", nativeQuery = true)
     boolean existsById (@Param("id") Long id);
 
     @Query(value = "select * from task where author_id = :authorId", nativeQuery = true)

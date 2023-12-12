@@ -3,8 +3,6 @@ package com.example.taskmanagementsystem.dto.request;
 import com.example.taskmanagementsystem.domain.Task;
 import com.example.taskmanagementsystem.domain.enums.Priority;
 import com.example.taskmanagementsystem.domain.enums.Status;
-import com.example.taskmanagementsystem.dto.UserRegistrationDto;
-import com.example.taskmanagementsystem.dto.response.TaskDto;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotNull;

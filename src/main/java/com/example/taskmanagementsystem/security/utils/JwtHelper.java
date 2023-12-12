@@ -3,9 +3,9 @@ package com.example.taskmanagementsystem.security.utils;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 
-import javax.security.auth.kerberos.KerberosTicket;
 import javax.servlet.http.HttpServletRequest;
 import java.security.Key;
+import java.security.KeyException;
 import java.util.Optional;
 
 public class JwtHelper {
@@ -18,7 +18,8 @@ public class JwtHelper {
     }
 
     public static Key getSignInKey(String key){
-        return Keys.hmacShaKeyFor(Decoders.BASE64.decode(key));
+        byte[] keyBytes = Decoders.BASE64.decode(key);
+        return Keys.hmacShaKeyFor(keyBytes);
     }
    private static class SecurityConst {
         public final static String PREFIX_BEARER = "Bearer ";

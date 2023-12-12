@@ -14,7 +14,7 @@ spring:
 
 jwt:
   secret:
-    key: ${JWT_KEY:SAJDOPKSADniosfjsdiofjsji4fopsjfopjsfoipsejkflajwndjfnklnmczk3kla3kmfklsmfkesimfoz3noinsoinfoisnfio3ffkmlsdfmksdfmokds}
+    key: ${JWT_KEY:421mkmmklmkm4klrm23kl3m2342341k2l435lkm43kl5mn234234mklmklm2354235325423l4kjjnjhnhjnbhbkbjkbfsdjfsdfgjdthb2342342134sdkfmsdfsddsf}
   token:
     access:
       expiration: ${JWT_ACCESS_EXPIRATION:31536000000}

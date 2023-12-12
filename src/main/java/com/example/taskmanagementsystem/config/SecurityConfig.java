@@ -37,7 +37,8 @@ public class SecurityConfig {
                 .mvcMatchers("/swagger-ui/**",
                         "/v3/**",
                         "/docs/**",
-                        "/user/authorize/**"
+                        "/user/authorize/**",
+                        "/user/registration/**"
                 ).permitAll()
                 .anyRequest().authenticated()
                 .and()

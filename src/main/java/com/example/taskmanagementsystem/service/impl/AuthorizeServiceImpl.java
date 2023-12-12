@@ -9,7 +9,6 @@ import com.example.taskmanagementsystem.security.sevice.JwtService;
 import com.example.taskmanagementsystem.service.AuthorizeService;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.firewall.RequestRejectedException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -34,7 +33,7 @@ public class AuthorizeServiceImpl implements AuthorizeService {
                 .orElseThrow(
                 () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Неверный логин или пароль")
         );
-        if (!passwordEncoder.matches(user.getPassword(), password)) {
+        if (!passwordEncoder.matches(password,user.getPassword())) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Неверный логин или пароль");
         }
         return jwtService.buildAccess(
@@ -51,7 +50,9 @@ public class AuthorizeServiceImpl implements AuthorizeService {
         if (userOptional.isPresent()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Пользователь с такой почтой уже существует");
         }
+
         User user = userRegistrationDto.createRegistrationUser(userRegistrationDto);
+        user.setPassword(passwordEncoder.encode(userRegistrationDto.getPassword()));
         userRepository.save(user);
     }
 }
