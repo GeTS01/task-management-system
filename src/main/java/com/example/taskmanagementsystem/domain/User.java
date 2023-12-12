@@ -1,7 +1,11 @@
 package com.example.taskmanagementsystem.domain;
 
+import com.example.taskmanagementsystem.domain.enums.Role;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Table;
 
 @Entity
@@ -22,6 +26,9 @@ public class User extends PersistentObject {
 
     @Column(name = "password")
     private String password;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role")
+    private Role role;
 
     public User(String name, String lastName, String patronymic, String email, String password) {
         this.name = name;
@@ -31,7 +38,8 @@ public class User extends PersistentObject {
         this.password = password;
     }
 
-    public User() {}
+    public User() {
+    }
 
     public String getName() {
         return name;
@@ -73,4 +81,11 @@ public class User extends PersistentObject {
         this.password = password;
     }
 
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
 }

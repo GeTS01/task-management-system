@@ -3,9 +3,12 @@ package com.example.taskmanagementsystem.dto.request;
 import com.example.taskmanagementsystem.domain.Task;
 import com.example.taskmanagementsystem.domain.enums.Priority;
 import com.example.taskmanagementsystem.domain.enums.Status;
+import com.example.taskmanagementsystem.dto.UserRegistrationDto;
+import com.example.taskmanagementsystem.dto.response.TaskDto;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotNull;
+import java.time.ZonedDateTime;
 
 public class CreateTaskDto {
 
@@ -47,8 +50,10 @@ public class CreateTaskDto {
         task.setStatus(create.getStatus());
         task.setAuthorId(create.getAuthorId());
         task.setExecutorId(create.getExecutorId());
+        task.setCreateAt(ZonedDateTime.now());
         return task;
     }
+
 
     public String getTitle() {
         return title;
@@ -97,4 +102,5 @@ public class CreateTaskDto {
     public void setExecutorId(long executorId) {
         this.executorId = executorId;
     }
+
 }

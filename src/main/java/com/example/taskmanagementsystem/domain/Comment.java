@@ -2,6 +2,8 @@ package com.example.taskmanagementsystem.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -10,14 +12,14 @@ public class Comment extends PersistentObject {
 
     @Column(name = "text")
     private String text;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User userId;
+    @ManyToOne
+    @JoinColumn(name = "task_id")
+    private Task taskId;
 
-    @Column(name = "user_id")
-    private long userId;
-
-    @Column(name = "task_id")
-    private long taskId;
-
-    public Comment(String text, long userId, long taskId) {
+    public Comment(String text, User userId, Task taskId) {
         this.text = text;
         this.userId = userId;
         this.taskId = taskId;
@@ -26,24 +28,19 @@ public class Comment extends PersistentObject {
     public String getText() {
         return text;
     }
-
     public void setText(String text) {
         this.text = text;
     }
-
-    public long getUserId() {
+    public User getUserId() {
         return userId;
     }
-
-    public void setUserId(long userId) {
+    public void setUserId(User userId) {
         this.userId = userId;
     }
-
-    public long getTaskId() {
+    public Task getTaskId() {
         return taskId;
     }
-
-    public void setTaskId(long taskId) {
+    public void setTaskId(Task taskId) {
         this.taskId = taskId;
     }
 

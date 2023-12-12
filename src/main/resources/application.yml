@@ -4,11 +4,19 @@ server:
 spring:
   datasource:
     username: postgres
-    password: Ivan230691
+    password: jon0311
     url: jdbc:postgresql://localhost:5432/taskmanagerdb
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
   liquibase:
-    enabled: false
-#      -drop
+    enabled:  false
+
+jwt:
+  secret:
+    key: ${JWT_KEY:SAJDOPKSADniosfjsdiofjsji4fopsjfopjsfoipsejkflajwndjfnklnmczk3kla3kmfklsmfkesimfoz3noinsoinfoisnfio3ffkmlsdfmksdfmokds}
+  token:
+    access:
+      expiration: ${JWT_ACCESS_EXPIRATION:31536000000}
+    refresh:
+      expiration: ${JWT_REFRESH_EXPIRATION:31536000000}
