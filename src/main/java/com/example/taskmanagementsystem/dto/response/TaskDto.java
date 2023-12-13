@@ -26,6 +26,16 @@ public class TaskDto {
         taskDto.setStatus(task.getStatus());
     }
 
+    public TaskDto TaskDto(Task task) {
+        TaskDto taskDto = new TaskDto();
+        taskDto.setId(task.getId());
+        taskDto.setAuthorId(task.getAuthorId());
+        taskDto.setExecutorId(task.getExecutorId());
+        taskDto.setPriority(task.getPriority());
+        taskDto.setStatus(task.getStatus());
+        return taskDto;
+    }
+
 
     public void setId(long id) {
         this.id = id;

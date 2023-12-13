@@ -25,7 +25,9 @@ public class TaskServiceImpl implements TaskService {
     public TaskDto create(CreateTaskDto createTaskDto) {
         var task = createTaskDto.CreateTaskDto(createTaskDto);
         taskRepository.save(task);
-        return new TaskDto();
+        TaskDto taskDto = new TaskDto();
+        var taskResponse = taskDto.TaskDto(task);
+        return taskResponse;
     }
 
     @Override

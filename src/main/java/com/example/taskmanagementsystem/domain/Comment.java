@@ -25,6 +25,9 @@ public class Comment extends PersistentObject {
         this.taskId = taskId;
     }
 
+    public Comment(){}
+
+
     public String getText() {
         return text;
     }
