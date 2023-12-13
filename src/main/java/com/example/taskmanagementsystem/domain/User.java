@@ -30,12 +30,19 @@ public class User extends PersistentObject {
     @Column(name = "role")
     private Role role;
 
-    public User(String name, String lastName, String patronymic, String email, String password) {
+    public User(
+            String name,
+            String lastName,
+            String patronymic,
+            String email,
+            String password,
+            Role role) {
         this.name = name;
         this.lastName = lastName;
         this.patronymic = patronymic;
         this.email = email;
         this.password = password;
+        this.role = role;
     }
 
     public User() {

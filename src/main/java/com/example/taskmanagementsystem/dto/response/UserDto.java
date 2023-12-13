@@ -11,9 +11,6 @@ public class UserDto {
     private String email;
     private String password;
 
-    public UserDto() {
-    }
-
     public UserDto(User user) {
         this.id = user.getId();
         this.name = user.getName();
@@ -22,6 +19,10 @@ public class UserDto {
         this.email = user.getEmail();
         this.password = user.getEmail();
     }
+
+    public UserDto() {
+    }
+
 
     public void setId(long id) {
         this.id = id;

@@ -8,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,6 +15,7 @@ import java.util.Optional;
 public class TaskServiceImpl implements TaskService {
 
     public final TaskRepository taskRepository;
+    public TaskDto taskDto;
 
     public TaskServiceImpl(TaskRepository taskRepository) {
         this.taskRepository = taskRepository;
@@ -23,15 +23,14 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public TaskDto create(CreateTaskDto createTaskDto) {
-        var task = createTaskDto.CreateTaskDto(createTaskDto);
-        taskRepository.save(task);
-        TaskDto taskDto = new TaskDto();
-        var taskResponse = taskDto.TaskDto(task);
-        return taskResponse;
+//        var task = createTaskDto.buildeTask(createTaskDto);
+//        taskRepository.save(task);
+//        return taskDto.buildTaskDto(task);
+        return null;
     }
 
     @Override
-    public Optional<TaskDto> updateById(long id, CreateTaskDto createTaskDto) {
+    public TaskDto updateById(long id, CreateTaskDto createTaskDto) {
         var taskOptional = taskRepository.findById(id);
         if (taskOptional.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Задаче не найдена");
@@ -41,11 +40,9 @@ public class TaskServiceImpl implements TaskService {
                 createTaskDto.getDescription(),
                 createTaskDto.getPriority(),
                 createTaskDto.getStatus(),
-                createTaskDto.getAuthorId(),
                 createTaskDto.getExecutorId(),
                 id);
-        var taskDto = new TaskDto(updateTask);
-        return Optional.of(taskDto);
+        return taskDto.buildTaskDto(updateTask);
     }
 
     @Override
@@ -57,36 +54,19 @@ public class TaskServiceImpl implements TaskService {
     public Optional<TaskDto> findById(long id) {
         var taskOptional = taskRepository.findById(id);
         if (taskOptional.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Задаче не найдена");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Задача не найдена");
         }
         var get = taskOptional.get();
-        var taskDto = new TaskDto(get);
-        return Optional.of(taskDto);
+        return Optional.of(taskDto.buildTaskDto(get));
     }
 
     @Override
-    public Optional<TaskDto> changeStatus(long id, long authorId) {
+    public Optional<TaskDto> changeStatus(long id) {
         var taskOptional = taskRepository.findById(id);
         if (taskOptional.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Задаче не найдена");
         }
-        var task = taskRepository.updateAuthorById(authorId, id);
-        var taskDto = new TaskDto(task);
-        return Optional.of(taskDto);
-    }
-
-    @Override
-    public Optional<List<TaskDto>> findListUsersTasks(long id, long authorId) {
-        boolean existsTask = taskRepository.existsById(id);
-        if (!existsTask) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Задаче не найдена");
-        }
-        var task = taskRepository.getListTaskByAuthorId(authorId);
-        List<TaskDto> taskDtoList = new ArrayList<>();
-        for (var item : task) {
-            var taskDto = new TaskDto(item);
-            taskDtoList.add(taskDto);
-        }
-        return Optional.of(taskDtoList);
+        var task = taskRepository.updateAuthorById(id);
+        return Optional.of(taskDto.buildTaskDto(task));
     }
 }

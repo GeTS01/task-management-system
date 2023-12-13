@@ -28,38 +28,31 @@ public class TaskController {
         return taskService.create(createTaskDto);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/id")
     @PreAuthorize(Role.CLIENT_NAME)
     public ResponseEntity<TaskDto> updateTaskById(@PathVariable long id, @RequestBody CreateTaskDto createTaskDto) {
-        Optional<TaskDto> updatedTask = taskService.updateById(id, createTaskDto);
-        return updatedTask.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+
+        TaskDto updatedTask = taskService.updateById(id, createTaskDto);
+        return ResponseEntity.ok(updatedTask);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/id")
     @PreAuthorize(Role.CLIENT_NAME)
     public void deleteTaskById(@PathVariable long id) {
         taskService.deleteById(id);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/id")
     @PreAuthorize(Role.CLIENT_NAME)
     public ResponseEntity<TaskDto> findTaskById(@PathVariable long id) {
         Optional<TaskDto> task = taskService.findById(id);
         return task.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @PutMapping("/{id}/changeStatus")
+    @PutMapping("/id/changeStatus")
     @PreAuthorize(Role.CLIENT_NAME)
-    public ResponseEntity<TaskDto> changeTaskStatus(@PathVariable long id, @RequestParam long authorId) {
-        Optional<TaskDto> updatedTask = taskService.changeStatus(id, authorId);
+    public ResponseEntity<TaskDto> changeTaskStatus(@PathVariable long id) {
+        Optional<TaskDto> updatedTask = taskService.changeStatus(id);
         return updatedTask.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
-
-    @GetMapping("/users/{id}")
-    @PreAuthorize(Role.CLIENT_NAME)
-    public ResponseEntity<List<TaskDto>> findUserTasks(@PathVariable long id, @RequestParam long userId) {
-        Optional<List<TaskDto>> tasks = taskService.findListUsersTasks(id, userId);
-        return tasks.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
-    }
-
 }

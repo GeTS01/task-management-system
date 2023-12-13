@@ -9,7 +9,7 @@ import java.util.Optional;
 public interface CommentService {
     CommentDto create(CreateCommentDto createCommentDto);
 
-    Optional<List<CommentDto>> findByUserIdAndTaskId(long userId, long taskId);
+    Optional<List<CommentDto>> findByUserIdAndTaskId(long taskId);
 
 
 }

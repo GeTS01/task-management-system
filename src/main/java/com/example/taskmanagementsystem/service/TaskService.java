@@ -9,10 +9,9 @@ import java.util.Optional;
 public interface TaskService {
 
     TaskDto create(CreateTaskDto createTaskDto);
-    Optional<TaskDto> updateById(long id, CreateTaskDto createTaskDto);
+    TaskDto updateById(long id, CreateTaskDto createTaskDto);
     void deleteById(long id);
     Optional<TaskDto> findById(long id);
-    Optional<TaskDto> changeStatus(long id, long authorId);
-    Optional<List<TaskDto>> findListUsersTasks(long id, long userId);
+    Optional<TaskDto> changeStatus(long id);
 
 }

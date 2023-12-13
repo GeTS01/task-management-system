@@ -12,39 +12,46 @@ public class Comment extends PersistentObject {
 
     @Column(name = "text")
     private String text;
+
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", nullable = false)
     private User userId;
+
+
     @ManyToOne
-    @JoinColumn(name = "task_id")
+    @JoinColumn(name = "task_id", nullable = false)
     private Task taskId;
 
     public Comment(String text, User userId, Task taskId) {
         this.text = text;
-        this.userId = userId;
         this.taskId = taskId;
+        this.userId = userId;
     }
 
-    public Comment(){}
-
+    public Comment() {
+    }
 
     public String getText() {
         return text;
     }
+
     public void setText(String text) {
         this.text = text;
     }
-    public User getUserId() {
-        return userId;
-    }
-    public void setUserId(User userId) {
-        this.userId = userId;
-    }
+
     public Task getTaskId() {
         return taskId;
     }
+
     public void setTaskId(Task taskId) {
         this.taskId = taskId;
     }
 
+    public User getUserId() {
+        return userId;
+    }
+
+    public void setUserId(User userId) {
+        this.userId = userId;
+    }
 }

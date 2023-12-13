@@ -13,31 +13,30 @@ public class Task extends PersistentObject {
 
     @Column(name = "title")
     private String title;
-
     @Column(name = "description")
     private String description;
-
     @Column(name = "priority")
     private Priority priority;
-
     @Column(name = "status")
     private Status status;
-
-    @Column(name = "author_id")
-    private long authorId;
-
     @Column(name = "executor_id")
     private long executorId;
 
-    public Task(long authorId, long executorId,
-                Priority priority,
-                Status status) {
-        this.authorId = authorId;
-        this.executorId = executorId;
+    public Task(
+            String title,
+            String description,
+            Priority priority,
+            Status status,
+            long executorId) {
+        this.title = title;
+        this.description = description;
         this.priority = priority;
         this.status = status;
+        this.executorId = executorId;
     }
-    public Task(){};
+
+    public Task() {
+    }
 
     public String getTitle() {
         return title;
@@ -53,14 +52,6 @@ public class Task extends PersistentObject {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public long getAuthorId() {
-        return authorId;
-    }
-
-    public void setAuthorId(long authorId) {
-        this.authorId = authorId;
     }
 
     public long getExecutorId() {

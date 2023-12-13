@@ -8,11 +8,13 @@ import javax.validation.constraints.NotNull;
 public class CreateUserDto {
 
     @NotNull
-    @Length(min = 3, max = 10)
+    @Length(min = 3, max = 20)
     private String name;
     @NotNull
+    @Length(min = 3, max = 20)
     private String lastName;
-    @NotNull
+
+    @Length(min = 3, max = 20)
     private String patronymic;
     @NotNull
     private String email;
@@ -27,13 +29,16 @@ public class CreateUserDto {
         this.password = password;
     }
 
-    public User CreateUserDto(CreateUserDto create) {
+    public CreateUserDto() {
+    }
+
+    public User builderUser(CreateUserDto createUserDto) {
         User user = new User();
-        user.setName(create.getName());
-        user.setLastName(create.getLastName());
-        user.setPatronymic(create.getPatronymic());
-        user.setEmail(create.getEmail());
-        user.setPassword(create.getPassword());
+        user.setName(createUserDto.getName());
+        user.setLastName(createUserDto.getLastName());
+        user.setPatronymic(createUserDto.getPatronymic());
+        user.setEmail(createUserDto.getEmail());
+        user.setPassword(createUserDto.getPassword());
         return user;
     }
 

@@ -11,48 +11,31 @@ import java.time.ZonedDateTime;
 public class CreateTaskDto {
 
     @NotNull
-    @Length(min = 3, max = 10)
     private String title;
-
     private String description;
-
     @NotNull
     private Priority priority;
-
     @NotNull
     private Status status;
-
-    @NotNull
-    private long authorId;
-
     @NotNull
     private long executorId;
-
-
-    public CreateTaskDto(String title, String description,
-                         Priority priority, Status status,
-                         long authorId, long executorId) {
+    
+    public CreateTaskDto(String title,
+                         String description,
+                         Priority priority,
+                         Status status,
+                         long executorId) {
         this.title = title;
         this.description = description;
         this.priority = priority;
         this.status = status;
-        this.authorId = authorId;
         this.executorId = executorId;
     }
 
-    public Task CreateTaskDto(CreateTaskDto create){
-        Task task = new Task();
-        task.setTitle(create.getTitle());
-        task.setDescription(create.getDescription());
-        task.setPriority(create.getPriority());
-        task.setStatus(create.getStatus());
-        task.setAuthorId(create.getAuthorId());
-        task.setExecutorId(create.getExecutorId());
-        task.setCreateAt(ZonedDateTime.now());
-        return task;
+    public CreateTaskDto() {
     }
 
-
+    
     public String getTitle() {
         return title;
     }
@@ -84,15 +67,7 @@ public class CreateTaskDto {
     public void setStatus(Status status) {
         this.status = status;
     }
-
-    public long getAuthorId() {
-        return authorId;
-    }
-
-    public void setAuthorId(long authorId) {
-        this.authorId = authorId;
-    }
-
+    
     public long getExecutorId() {
         return executorId;
     }

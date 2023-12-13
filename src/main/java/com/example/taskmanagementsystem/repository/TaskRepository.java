@@ -18,7 +18,6 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
                     "description = :description, " +
                     "priority = :priority, " +
                     "status = :status, " +
-                    "author_id = :authorId, " +
                     "executor_id = :executorId " +
                     "WHERE id = :id ",
             nativeQuery = true)
@@ -26,22 +25,12 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
                     @Param("description") String description,
                     @Param("priority") Priority priority,
                     @Param("status") Status status,
-                    @Param("authorId") Long authorId,
                     @Param("executorId") Long executorId,
                     @Param("id") Long id);
 
     @Query(value = "UPDATE task SET " +
-            "author_id = :authorId " +
             "WHERE id = :id ",
             nativeQuery = true)
-    Task updateAuthorById(@Param("authorId") Long authorId,
-                          @Param("id") Long id);
-
-    @Query(value = "SELECT EXISTS (select * from task t where t.id = :id)", nativeQuery = true)
-    boolean existsById (@Param("id") Long id);
-
-    @Query(value = "select * from task where author_id = :authorId", nativeQuery = true)
-    List<Task> getListTaskByAuthorId(@Param("authorId") Long authorId);
-
+    Task updateAuthorById(@Param("id") Long id);
 
 }
