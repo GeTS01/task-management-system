@@ -8,7 +8,7 @@ spring:
     url: jdbc:postgresql://localhost:5432/taskmanagerdb
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: create
 jwt:
   secret:
     key: ${JWT_KEY:421mkmmklmkm4klrm23kl3m2342341k2l435lkm43kl5mn234234mklmklm2354235325423l4kjjnjhnhjnbhbkbjkbfsdjfsdfgjdthb2342342134sdkfmsdfsddsf}
