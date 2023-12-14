@@ -1,6 +1,7 @@
 package com.example.taskmanagementsystem.dto.response;
 
 import com.example.taskmanagementsystem.domain.Task;
+import com.example.taskmanagementsystem.domain.User;
 import com.example.taskmanagementsystem.domain.enums.Priority;
 import com.example.taskmanagementsystem.domain.enums.Status;
 
@@ -17,20 +18,18 @@ public class TaskDto {
     public TaskDto() {
     }
 
-    public TaskDto(long id,  long executorId, Priority priority, Status status) {
+    public TaskDto(long id, long executorId, Priority priority, Status status) {
         this.id = id;
         this.executorId = executorId;
         this.priority = priority;
         this.status = status;
     }
 
-    public TaskDto buildTaskDto(Task task) {
-        TaskDto taskDto = new TaskDto();
-        taskDto.setId(task.getId());
-        taskDto.setExecutorId(task.getExecutorId());
-        taskDto.setPriority(task.getPriority());
-        taskDto.setStatus(task.getStatus());
-        return taskDto;
+    public TaskDto(Task task) {
+        this.id = task.getId();
+        this.executorId = task.getExecutorId();
+        this.priority = task.getPriority();
+        this.status = task.getStatus();
     }
 
     public long getId() {

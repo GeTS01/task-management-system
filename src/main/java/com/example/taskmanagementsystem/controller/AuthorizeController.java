@@ -1,7 +1,7 @@
 package com.example.taskmanagementsystem.controller;
 
-import com.example.taskmanagementsystem.dto.AuthorizeDto;
-import com.example.taskmanagementsystem.dto.UserRegistrationDto;
+import com.example.taskmanagementsystem.dto.request.CreateAuthorizeDto;
+import com.example.taskmanagementsystem.dto.request.CreateUserRegistrationDto;
 import com.example.taskmanagementsystem.security.Token;
 import com.example.taskmanagementsystem.service.AuthorizeService;
 import io.swagger.annotations.ApiOperation;
@@ -26,14 +26,14 @@ public class AuthorizeController {
     @PostMapping("/authorize")
     @ApiOperation(value = "Авторизация пользователя",
             notes = "Метод осуществляет авторизацию пользователя с использованием переданных учетных данных")
-    public Token authorize(@RequestBody AuthorizeDto dto) {
+    public Token authorize(@RequestBody @Valid CreateAuthorizeDto dto) {
         return authorizeService.authorize(dto.getEmail(), dto.getPassword());
     }
 
     @PostMapping("/registration")
     @ApiOperation(value = "Регистрация пользователя",
             notes = "Метод осуществляет регистрацию пользователя с использованием переданных учетных данных")
-    public void registration(@RequestBody UserRegistrationDto dto) {
+    public void registration(@RequestBody @Valid CreateUserRegistrationDto dto) {
         authorizeService.registration(dto);
     }
 }

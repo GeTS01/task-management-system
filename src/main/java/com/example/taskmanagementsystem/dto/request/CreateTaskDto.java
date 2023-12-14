@@ -1,38 +1,45 @@
 package com.example.taskmanagementsystem.dto.request;
 
-import com.example.taskmanagementsystem.domain.Task;
 import com.example.taskmanagementsystem.domain.enums.Priority;
 import com.example.taskmanagementsystem.domain.enums.Status;
-import org.hibernate.validator.constraints.Length;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
-import java.time.ZonedDateTime;
 
 public class CreateTaskDto {
 
-    @NotNull
+    @NotNull(message = "Поле заголовок не должно быть пустым")
     private String title;
     private String description;
-    @NotNull
+    @NotNull(message = "Поле приоритетности не дожно быть пустым")
     private Priority priority;
-    @NotNull
+    @NotNull(message = "Поле статус не должно быть пустым")
     private Status status;
-    @NotNull
-    private long executorId;
+    @NotNull(message = "Почта не должна быть пустой пустое")
+    @Email
+    private String email;
     
     public CreateTaskDto(String title,
                          String description,
                          Priority priority,
                          Status status,
-                         long executorId) {
+                         String email) {
         this.title = title;
         this.description = description;
         this.priority = priority;
         this.status = status;
-        this.executorId = executorId;
+        this.email = email;
     }
 
     public CreateTaskDto() {
+    }
+
+    public CreateTaskDto(CreateTaskDto createTaskDto){
+        this.title = createTaskDto.getTitle();
+        this.description = createTaskDto.getDescription();
+        this.priority = createTaskDto.getPriority();
+        this.status = createTaskDto.getStatus();
+        this.email = createTaskDto.email;
     }
 
     
@@ -67,13 +74,12 @@ public class CreateTaskDto {
     public void setStatus(Status status) {
         this.status = status;
     }
-    
-    public long getExecutorId() {
-        return executorId;
+
+    public String getEmail() {
+        return email;
     }
 
-    public void setExecutorId(long executorId) {
-        this.executorId = executorId;
+    public void setEmail(String email) {
+        this.email = email;
     }
-
 }

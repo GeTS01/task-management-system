@@ -18,6 +18,6 @@ public class AuthorizedUserServiceImpl implements AuthorizedUserService {
     @Override
     public User getUser() {
         AuthorizedUser authorizedUser = (AuthorizedUser) SecurityContextHolder.getContext().getAuthentication();
-        return userRepository.findByEmailAndPassword(authorizedUser.getName(), authorizedUser.getPassword()).get();
+        return userRepository.findByEmailAndPassword(authorizedUser.getUsername(), authorizedUser.getPassword()).get();
     }
 }

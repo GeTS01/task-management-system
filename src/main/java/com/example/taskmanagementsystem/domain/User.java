@@ -95,4 +95,5 @@ public class User extends PersistentObject {
     public void setRole(Role role) {
         this.role = role;
     }
+
 }

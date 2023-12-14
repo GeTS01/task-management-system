@@ -58,5 +58,6 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                 user.getEmail(), user.getPassword(), List.of(new SimpleGrantedAuthority(user.getRole().name())), user.getId()
         );
         SecurityContextHolder.getContext().setAuthentication(authorizedUser);
+        filterChain.doFilter(request,response);
     }
 }

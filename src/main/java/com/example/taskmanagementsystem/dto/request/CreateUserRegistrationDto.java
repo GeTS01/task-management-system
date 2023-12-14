@@ -1,15 +1,13 @@
-package com.example.taskmanagementsystem.dto;
+package com.example.taskmanagementsystem.dto.request;
 
-import com.example.taskmanagementsystem.domain.User;
 import com.example.taskmanagementsystem.domain.enums.Role;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-import java.time.ZonedDateTime;
 
-public class UserRegistrationDto {
+public class CreateUserRegistrationDto {
     @NotNull
     @Size(min = 3, max = 10)
     private String name;
@@ -19,7 +17,7 @@ public class UserRegistrationDto {
     private String patronymic;
     @Email
     private String email;
-    @Size(min=6, max=20)
+    @Size(min = 6, max = 20)
     @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^\\w\\s]).{8,}",
             message = """
                     Имеет длину не менее 8 символов.
@@ -33,16 +31,14 @@ public class UserRegistrationDto {
     @NotNull
     private Role role;
 
-    public User createRegistrationUser(UserRegistrationDto userRegistrationDto) {
-        User user = new User();
-        user.setName(userRegistrationDto.getName());
-        user.setName(userRegistrationDto.getLastName());
-        user.setPatronymic(userRegistrationDto.getPatronymic());
-        user.setEmail(userRegistrationDto.getEmail());
-        user.setPassword(userRegistrationDto.getPassword());
-        user.setRole(userRegistrationDto.getRole());
-        user.setCreateAt(ZonedDateTime.now());
-        return user;
+
+    public CreateUserRegistrationDto(String name, String lastName, String patronymic, String email, String password, Role role) {
+        this.name = name;
+        this.lastName = lastName;
+        this.patronymic = patronymic;
+        this.email = email;
+        this.password = password;
+        this.role = role;
     }
 
     public String getName() {

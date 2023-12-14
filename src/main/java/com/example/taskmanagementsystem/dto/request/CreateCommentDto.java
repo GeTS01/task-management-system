@@ -1,25 +1,27 @@
 package com.example.taskmanagementsystem.dto.request;
 
 import com.example.taskmanagementsystem.domain.Comment;
-import com.example.taskmanagementsystem.domain.Task;
 
-import java.time.ZonedDateTime;
+import javax.validation.constraints.NotNull;
 
 public class CreateCommentDto {
-    private String text;
-    private Task taskId;
 
-    public CreateCommentDto(String text, Task taskId) {
+    @NotNull(message = "Текст к комментарию не должен быть пустым")
+    private String text;
+    @NotNull(message = "Укажите идентификатор задачи, к которой хотите оставить комментарий")
+    private long taskId;
+
+    public CreateCommentDto(String text, long taskId) {
         this.text = text;
         this.taskId = taskId;
     }
 
-    public Comment buildComment(CreateCommentDto createCommentDto) {
-        Comment comment = new Comment();
-        comment.setText(createCommentDto.getText());
-        comment.setTaskId(createCommentDto.taskId);
-        comment.setCreateAt(ZonedDateTime.now());
-        return comment;
+    public long getTaskId() {
+        return taskId;
+    }
+
+    public void setTaskId(long taskId) {
+        this.taskId = taskId;
     }
 
     public String getText() {
@@ -30,11 +32,4 @@ public class CreateCommentDto {
         this.text = text;
     }
 
-    public Task getTaskId() {
-        return taskId;
-    }
-
-    public void setTaskId(Task taskId) {
-        this.taskId = taskId;
-    }
 }

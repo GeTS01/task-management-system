@@ -16,9 +16,9 @@ public class CreateUserDto {
 
     @Length(min = 3, max = 20)
     private String patronymic;
-    @NotNull
+    @NotNull(message = "Почта не должна быть пустой пустое")
     private String email;
-    @NotNull
+    @NotNull(message = "Пароль не должна быть пустой пустое")
     private String password;
 
     public CreateUserDto(String name, String lastName, String patronymic, String email, String password) {
@@ -30,16 +30,6 @@ public class CreateUserDto {
     }
 
     public CreateUserDto() {
-    }
-
-    public User builderUser(CreateUserDto createUserDto) {
-        User user = new User();
-        user.setName(createUserDto.getName());
-        user.setLastName(createUserDto.getLastName());
-        user.setPatronymic(createUserDto.getPatronymic());
-        user.setEmail(createUserDto.getEmail());
-        user.setPassword(createUserDto.getPassword());
-        return user;
     }
 
     public String getName() {

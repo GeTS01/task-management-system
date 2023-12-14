@@ -6,14 +6,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface CommentRepository extends JpaRepository<Comment, Long> {
 
 
-    @Query(value = "select * from comments c where c.task_id = taskId order by c.id desc ",
+    @Query(value = "select * from comments c where c.author_id = 1 and c.task_id = 2 ",
             nativeQuery = true)
-
-    Optional<List<Comment>> findByUserIdAndTaskId(@Param("taskId") long taskId);
+    List<Comment> findByAuthorIdAndTaskId(@Param("authorId") long authorId, @Param("taskId") long taskId);
 
 }

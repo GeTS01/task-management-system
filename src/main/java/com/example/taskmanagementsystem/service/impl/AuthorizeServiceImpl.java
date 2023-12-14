@@ -1,7 +1,7 @@
 package com.example.taskmanagementsystem.service.impl;
 
 import com.example.taskmanagementsystem.domain.User;
-import com.example.taskmanagementsystem.dto.UserRegistrationDto;
+import com.example.taskmanagementsystem.dto.request.CreateUserRegistrationDto;
 import com.example.taskmanagementsystem.repository.UserRepository;
 import com.example.taskmanagementsystem.security.Token;
 import com.example.taskmanagementsystem.security.enums.TokenType;
@@ -12,6 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.ZonedDateTime;
 import java.util.Map;
 import java.util.Optional;
 
@@ -45,14 +46,22 @@ public class AuthorizeServiceImpl implements AuthorizeService {
     }
 
     @Override
-    public void registration(UserRegistrationDto userRegistrationDto) {
-        Optional<User> userOptional = userRepository.findByEmail(userRegistrationDto.getEmail());
+    public void registration(CreateUserRegistrationDto createUserRegistrationDto) {
+        Optional<User> userOptional = userRepository.findByEmail(createUserRegistrationDto.getEmail());
         if (userOptional.isPresent()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Пользователь с такой почтой уже существует");
         }
 
-        User user = userRegistrationDto.createRegistrationUser(userRegistrationDto);
-        user.setPassword(passwordEncoder.encode(userRegistrationDto.getPassword()));
+        User user = new User(
+                createUserRegistrationDto.getName(),
+                createUserRegistrationDto.getLastName(),
+                createUserRegistrationDto.getPatronymic(),
+                createUserRegistrationDto.getEmail(),
+                createUserRegistrationDto.getPassword(),
+                createUserRegistrationDto.getRole()
+        );
+        user.setCreateAt(ZonedDateTime.now());
+        user.setPassword(passwordEncoder.encode(createUserRegistrationDto.getPassword()));
         userRepository.save(user);
     }
 }
