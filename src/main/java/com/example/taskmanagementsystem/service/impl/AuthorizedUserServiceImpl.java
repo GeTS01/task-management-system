@@ -15,6 +15,9 @@ public class AuthorizedUserServiceImpl implements AuthorizedUserService {
         this.userRepository = userRepository;
     }
 
+    /**
+     * Метод для получения авторизованного пользователя
+     */
     @Override
     public User getUser() {
         AuthorizedUser authorizedUser = (AuthorizedUser) SecurityContextHolder.getContext().getAuthentication();

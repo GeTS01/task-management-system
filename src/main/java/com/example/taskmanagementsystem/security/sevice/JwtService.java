@@ -6,7 +6,7 @@ import com.example.taskmanagementsystem.security.enums.TokenType;
 import java.util.Map;
 
 public interface JwtService {
-    Token buildAccess(Map<String, Object> claims, TokenType tokenType);
+    Token build(Map<String, Object> claims, TokenType tokenType);
 
     Map<String, Object> extractAllClaims(String token);
 

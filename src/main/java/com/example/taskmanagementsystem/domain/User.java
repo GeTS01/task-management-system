@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Table;
+import java.util.Objects;
 
 @Entity
 @Table(name = "users")
@@ -96,4 +97,20 @@ public class User extends PersistentObject {
         this.role = role;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        User user = (User) o;
+        return Objects.equals(name, user.name) && Objects.equals(lastName, user.lastName) && Objects.equals(patronymic, user.patronymic) && Objects.equals(email, user.email) && Objects.equals(password, user.password) && role == user.role;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, lastName, patronymic, email, password, role);
+    }
 }

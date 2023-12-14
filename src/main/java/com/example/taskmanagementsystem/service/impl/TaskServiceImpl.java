@@ -29,6 +29,10 @@ public class TaskServiceImpl implements TaskService {
         this.authorizedUserService = authorizedUserService;
     }
 
+
+    /**
+     * Метод для создания задачи
+     */
     @Override
     public void create(CreateTaskDto createTaskDto) {
         var authorId = authorizedUserService.getUser().getId();
@@ -48,6 +52,10 @@ public class TaskServiceImpl implements TaskService {
         taskRepository.save(task);
     }
 
+
+    /**
+     * Метод для обновления задачи по id (идентификатору)
+     */
     @Override
     public void update(long id, CreateTaskDto createTaskDto) {
         var authorId = authorizedUserService.getUser().getId();
@@ -67,6 +75,9 @@ public class TaskServiceImpl implements TaskService {
         task = taskRepository.save(task);
     }
 
+    /**
+     * Метод для удаления задачи
+     */
     @Override
     public void delete(long id) {
         var authorId = authorizedUserService.getUser().getId();
@@ -76,6 +87,9 @@ public class TaskServiceImpl implements TaskService {
         taskRepository.deleteById(task.getId());
     }
 
+    /**
+     * Метод для получения задачи id (идентификатору)
+     */
     @Override
     public TaskDto read(long id) {
         var authorId = authorizedUserService.getUser().getId();
@@ -85,6 +99,9 @@ public class TaskServiceImpl implements TaskService {
         return new TaskDto(task);
     }
 
+    /**
+     * Метод для обновления статуса задачи
+     */
     @Override
     public void updateStatus(long id, Status status) {
         var authorId = authorizedUserService.getUser().getId();

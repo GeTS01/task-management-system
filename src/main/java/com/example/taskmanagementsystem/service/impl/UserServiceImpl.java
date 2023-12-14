@@ -21,11 +21,17 @@ public class UserServiceImpl implements UserService {
         this.userRepository = repository;
     }
 
+    /**
+     * Метод для получения арторизованного пользованеля
+     */
     @Override
     public UserDto read() {
         return new UserDto(authorizedUserService.getUser());
     }
 
+    /**
+     * Метод для получения пользованеля по id (идентификатору)
+     */
     @Override
     public UserDto readById(long id) {
         Optional<User> userOptional = userRepository.findById(id);

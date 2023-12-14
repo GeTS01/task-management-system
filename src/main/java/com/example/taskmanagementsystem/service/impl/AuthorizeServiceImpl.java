@@ -28,6 +28,9 @@ public class AuthorizeServiceImpl implements AuthorizeService {
         this.jwtService = jwtService;
     }
 
+    /**
+     * Метод для авторизации пользователя
+     */
     @Override
     public Token authorize(String email, String password) {
         User user = userRepository.findByEmail(email)
@@ -37,7 +40,7 @@ public class AuthorizeServiceImpl implements AuthorizeService {
         if (!passwordEncoder.matches(password,user.getPassword())) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Неверный логин или пароль");
         }
-        return jwtService.buildAccess(
+        return jwtService.build(
                 Map.of(
                         "id", user.getId(),
                         "email", user.getEmail(),
@@ -45,13 +48,15 @@ public class AuthorizeServiceImpl implements AuthorizeService {
                 ), TokenType.ACCESS);
     }
 
+    /**
+     * Метод для регистрации пользователя
+     */
     @Override
     public void registration(CreateUserRegistrationDto createUserRegistrationDto) {
         Optional<User> userOptional = userRepository.findByEmail(createUserRegistrationDto.getEmail());
         if (userOptional.isPresent()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Пользователь с такой почтой уже существует");
         }
-
         User user = new User(
                 createUserRegistrationDto.getName(),
                 createUserRegistrationDto.getLastName(),

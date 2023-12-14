@@ -29,7 +29,6 @@ public class JwtServiceImpl implements JwtService {
 
     private final String secret;
 
-//    @Autowired
     public JwtServiceImpl(
                         @Value("${jwt.token.access.expiration}")
                         long accessExp,
@@ -43,7 +42,7 @@ public class JwtServiceImpl implements JwtService {
     }
 
     @Override
-    public Token buildAccess(Map<String, Object> claims, TokenType tokenType) {
+    public Token build(Map<String, Object> claims, TokenType tokenType) {
         long exp = (tokenType.equals(TokenType.ACCESS)) ? accessExp : refreshExp;
         String token = Jwts
                 .builder()

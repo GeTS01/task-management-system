@@ -33,16 +33,19 @@ public class CommentServiceImpl implements CommentService {
         this.userRepository = userRepository;
     }
 
-    //todo проверить таск айди
+    /**
+     * Метод для создания комментария к конкретной задаче
+     */
     @Override
     public CommentDto create(CreateCommentDto createCommentDto) {
         var authorId = authorizedUserService.getUser().getId();
-        var user = userRepository.findById(authorId);
+        var userOptional = userRepository.findById(authorId);
         var task = taskRepository.findById(createCommentDto.getTaskId())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Задаче не найдена"));
+        var user = userOptional.get();
         Comment comment = new Comment(
                 createCommentDto.getText(),
-                user.get(),
+                user,
                 task);
         comment.setCreateAt(ZonedDateTime.now());
         commentRepository.save(comment);
@@ -53,6 +56,9 @@ public class CommentServiceImpl implements CommentService {
                 comment.getTaskId());
     }
 
+    /**
+     * Метод для получения списка комментариев определенной задачи
+     */
     @Override
     public List<CommentDto> readList(long taskId) {
         long authorId = authorizedUserService.getUser().getId();
